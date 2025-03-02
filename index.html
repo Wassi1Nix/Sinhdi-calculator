@@ -2,117 +2,109 @@
 <html lang="sd" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Sindhi Calculator</title>
+  <title>Modern Sindhi Calculator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap">
   <style>
+    /* Page Setup */
     body {
-      font-family: 'Noto Sans Arabic', sans-serif; /* Use a font that supports Sindhi script */
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Noto Sans Arabic', sans-serif; /* Ensure you have a font that supports Sindhi/Arabic */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
       background: #f0f0f0;
-      text-align: right;
+      text-align: right; /* Right-to-left alignment for Sindhi */
     }
+
+    /* Calculator Container */
     #calculator {
-      background: #fff;
+      background: #ffffff;
+      width: 320px;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 220px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
+
+    /* Display Screen */
     #display {
       width: 100%;
-      height: 40px;
-      margin-bottom: 10px;
-      text-align: right;
-      font-size: 1.2em;
-      padding: 5px;
+      height: 50px;
+      margin-bottom: 15px;
+      padding: 0 10px;
+      font-size: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
       box-sizing: border-box;
+      text-align: right; /* Ensure text is right-aligned for Sindhi */
     }
-    button {
-      width: 45px;
-      height: 45px;
-      margin: 5px;
-      font-size: 1.2em;
-      cursor: pointer;
-    }
-    .row {
+
+    /* Rows for Buttons */
+    .button-row {
       display: flex;
-      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
     }
+
+    /* General Button Styles */
+    button {
+      flex: 1;
+      height: 50px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #e2e2e2;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #d2d2d2;
+    }
+
+    /* "صاف" (Clear) Button */
+    .clear-btn {
+      flex: 2; 
+      background: #f78181; /* Slightly red/pink background for emphasis */
+      color: #fff;
+      font-weight: bold;
+    }
+    .clear-btn:hover {
+      background: #f55656;
+    }
+
   </style>
 </head>
 <body>
   <div id="calculator">
-    <input type="text" id="display" readonly>
+    <!-- Display Screen -->
+    <input type="text" id="display" readonly />
 
     <!-- Row 1 -->
-    <div class="row">
+    <div class="button-row">
       <button onclick="appendDigit('٧')">٧</button>
       <button onclick="appendDigit('٨')">٨</button>
       <button onclick="appendDigit('٩')">٩</button>
       <button onclick="chooseOperation('÷')">÷</button>
     </div>
+
     <!-- Row 2 -->
-    <div class="row">
+    <div class="button-row">
       <button onclick="appendDigit('٤')">٤</button>
       <button onclick="appendDigit('٥')">٥</button>
       <button onclick="appendDigit('٦')">٦</button>
       <button onclick="chooseOperation('×')">×</button>
     </div>
+
     <!-- Row 3 -->
-    <div class="row">
+    <div class="button-row">
       <button onclick="appendDigit('١')">١</button>
       <button onclick="appendDigit('٢')">٢</button>
       <button onclick="appendDigit('٣')">٣</button>
       <button onclick="chooseOperation('-')">-</button>
     </div>
+
     <!-- Row 4 -->
-    <div class="row">
-      <button onclick="appendDigit('٠')">٠</button>
-      <button onclick="appendDigit('.')">.</button>
-      <button onclick="calculate()">=</button>
-      <button onclick="chooseOperation('+')">+</button>
-    </div>
-    <!-- Clear Button -->
-    <div class="row">
-      <button style="width: 100%;" onclick="clearDisplay()">صاف</button>
-    </div>
-  </div>
-
-  <script>
-    let currentOperand = '';
-    let previousOperand = '';
-    let operation = null;
-
-    function appendDigit(digit) {
-      document.getElementById('display').value += digit;
-    }
-
-    function chooseOperation(op) {
-      previousOperand = document.getElementById('display').value;
-      operation = op;
-      document.getElementById('display').value = '';
-    }
-
-    function calculate() {
-      currentOperand = document.getElementById('display').value;
-      // Convert Sindhi digits to English digits
-      let englishPrevious = convertToEnglishDigits(previousOperand);
-      let englishCurrent = convertToEnglishDigits(currentOperand);
-
-      let result;
-      switch (operation) {
-        case '+':
-          result = parseFloat(englishPrevious) + parseFloat(englishCurrent);
-          break;
-        case '-':
-          result = parseFloat(englishPrevious) - parseFloat(englishCurrent);
-          break;
-        case '×':
-          result = parseFloat(englishPrevious) * parseFloat(englishCurrent);
-          break;
-        case '÷':
-          if (parseFloat(englishCurrent) === 0) {
-            alert("0
+    <div class="button-row">
+      <button onclick="appendDigit('٠')">
